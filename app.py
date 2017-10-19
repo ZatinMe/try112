@@ -51,10 +51,11 @@ def processRequest(req):
         GMAIL = build('gmail', 'v1', http=creds.authorize(Http()))
 
         threads = GMAIL.users().threads().list(userId='me').execute().get('threads', [])
+        subjectll = ''
         for thread in threads:
             tdata = GMAIL.users().threads().get(userId='me', id=thread['id']).execute()
             nmsgs = len(tdata['messages'])
-            subjectll = ''
+
             if nmsgs > 3:
                 msg = tdata['messages'][0]['payload']
                 subject = ''
@@ -68,7 +69,7 @@ def processRequest(req):
                     # print("hello you!!!")
                     # print ('%s (%d msgs)' % (subject, nmsgs))
                     subjectll = subjectll + subject
-        speech = subject11
+        speech = subjectll
         print(speech)
 
         return {

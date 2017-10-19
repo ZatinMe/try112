@@ -18,9 +18,6 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-CLIENT_SECRET = 'client_secret.json'
-
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -43,6 +40,10 @@ def webhook():
 
 def processRequest(req):
     if req.get("result").get("action") == "action_1":
+        
+        SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+        CLIENT_SECRET = 'client_secret.json'
+        
         store = file.Storage('storage.json')
         creds = store.get()
         if not creds or creds.invalid:
@@ -56,26 +57,24 @@ def processRequest(req):
             tdata = GMAIL.users().threads().get(userId='me', id=thread['id']).execute()
             nmsgs = len(tdata['messages'])
 
-            if nmsgs > 3:
+            if nmsgs > 0:
                 msg = tdata['messages'][0]['payload']
                 subject = ''
                 for header in msg['headers']:
                     if header['name'] == 'Subject':
                         # print("if hello")
                         subject = header['value']
-                        # print (subject)
+                        subjectll = subjectll + " " + subject
                         break
-                if subject:
-                    # print("hello you!!!")
-                    # print ('%s (%d msgs)' % (subject, nmsgs))
-                    subjectll = subjectll + subject
+               
+                    
         speech = subjectll
         print(speech)
 
         return {
             "speech": speech,
             "displayText": speech,
-            # "source": "apiai-weather-webhook-sample"
+            "source": "apiai-weather-webhook-sample"
         }
 
 

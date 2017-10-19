@@ -14,6 +14,8 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+CLIENT_SECRET ='client_secret.json'
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -36,9 +38,6 @@ def webhook():
 
 def processRequest(req):
     if req.get("result").get("action") == "action_1":
-        SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-        CLIENT_SECRET ='client_secret.json'
-
         store = file.Storage('storage.json')
         creds = store.get()
         if not creds or creds.invalid:

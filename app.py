@@ -71,8 +71,8 @@ def processRequest(req):
                         sub1 = sub1 + subject + "\n" 
                         break
                         """
-        
-        speech = "kya hua re"
+        text = "i am me"
+        speech = text
         print("response:")
         print(speech)
         

@@ -68,7 +68,7 @@ def processRequest(req):
                 for header in msg['headers']:
                     if header['name'] == 'Subject':
                         subject = str(header['value'])
-                        sub1 = sub1 + subject + "\n" 
+                        sub1 += subject  
                         break
                         
         

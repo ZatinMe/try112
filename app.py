@@ -71,7 +71,7 @@ def processRequest(req):
                         sub1 = sub1+ "\n" + subject
                         break
         
-        speech = str(sub1)
+        speech = sub1
         print("response:")
         print(speech)
         
@@ -79,6 +79,7 @@ def processRequest(req):
             "speech": speech,
             "displayText": speech,
             "source": "https://github.com/ZatinMe/try112.git"
+            "messages["speech"]":speech,
         }
 
 

@@ -14,7 +14,7 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-from googleapiclient.discovery import build
+from apiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 

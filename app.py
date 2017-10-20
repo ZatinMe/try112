@@ -67,7 +67,7 @@ def processRequest(req):
                         subject = header['value']
                         sub1 = sub1+ "\n" + subject
                         break
-        speech "this is what is "
+        speech = "this is what is "
         
         print(speech + " \n okay this is it")
         return {

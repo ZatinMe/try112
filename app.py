@@ -33,7 +33,7 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    print(res + "returned file")
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -61,14 +61,14 @@ def processRequest(req):
                 for header in msg['headers']:
                     if header['name'] == 'Subject':
                         subject = header['value']
-                        #sub1 = sub1+ " " + subject
+                        sub1 = sub1+ "\n" + subject
                         break
-        speech = subject
+        speech = sub1
         print(speech + "  okay this is it")
         return {
             "speech": speech,
             "displayText": speech,
-            #"source": "apiai-weather-webhook-sample"
+            "source": "https://github.com/ZatinMe/try112.git"
         }
 
 

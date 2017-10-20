@@ -64,7 +64,7 @@ def processRequest(req):
                         sub1 = sub1+ " " + subject
                         break
         speech = sub1
-        print(speech)
+        print(speech + "  okay this is it")
         return {
             "speech": speech,
             "displayText": speech,

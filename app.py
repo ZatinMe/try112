@@ -68,7 +68,7 @@ def processRequest(req):
                 for header in msg['headers']:
                     if header['name'] == 'Subject':
                         subject = header['value']
-                        sub1 = sub1+ "\n" + subject
+                        sub1 = sub1 + subject + "\n" 
                         break
         
         speech = sub1
@@ -76,10 +76,12 @@ def processRequest(req):
         print(speech)
         
         return {
-            "speech": speech,
-            "displayText": speech,
-            "source": "https://github.com/ZatinMe/try112.git"
-        }
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
 
 
 if __name__ == '__main__':

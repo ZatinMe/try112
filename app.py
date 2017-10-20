@@ -55,7 +55,7 @@ def processRequest(req):
             tdata = GMAIL.users().threads().get(userId='me', id=thread['id']).execute()
             nmsgs = len(tdata['messages'])
 
-            if nmsgs > 0:
+            if nmsgs > 3:
                 msg = tdata['messages'][0]['payload']
                 subject = ''
                 for header in msg['headers']:

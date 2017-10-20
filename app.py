@@ -45,7 +45,7 @@ def webhook():
 
 def processRequest(req):
     if req.get("result").get("action") == "action_1":
-        
+        """
         SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
         CLIENT_SECRET ='client_secret.json'
         
@@ -70,6 +70,7 @@ def processRequest(req):
                         subject = header['value']
                         sub1 = sub1 + subject + "\n" 
                         break
+                        """
         
         speech = "kya hua re"
         print("response:")

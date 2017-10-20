@@ -51,28 +51,29 @@ def processRequest(req):
         
         store = file.Storage('storage.json')
         creds = store.get()
-        
         if not creds or creds.invalid:
             flow = client.flow_from_clientsecrets(CLIENT_SECRET, SCOPES)
             creds = tools.run_flow(flow,store)
         GMAIL = build('gmail', 'v1', http=creds.authorize(Http()))
-        sub1 = '' 
+
         threads = GMAIL.users().threads().list(userId='me').execute().get('threads',[])
+        i = 0
+        sub = ""
         for thread in threads:
+            if i>5:
+                break
+            i+=1
+
             tdata = GMAIL.users().threads().get(userId='me', id=thread['id']).execute()
             nmsgs = len(tdata['messages'])
 
-            if nmsgs > 2:
-                msg = tdata['messages'][0]['payload']
-                subject = ''
-                for header in msg['headers']:
-                    if header['name'] == 'Subject':
-                        subject = str(header['value'])
-                        sub1 += subject  
-                        break
-                        
-        
-        speech = sub1
+            if nmsgs > 0:
+                msg = tdata['messages'][0]['snippet']
+                subject = msg
+                if subject:
+                    print ('%s (%d msgs)' % (subject, nmsgs))
+                     sub = str(i) + sub + subject + "/n"   
+        speech = sub
         print("response:")
         print(speech)
         

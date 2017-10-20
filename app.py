@@ -61,9 +61,9 @@ def processRequest(req):
                 for header in msg['headers']:
                     if header['name'] == 'Subject':
                         subject = header['value']
-                        sub1 = sub1+ " " + subject
+                        #sub1 = sub1+ " " + subject
                         break
-        speech = sub1
+        speech = subject
         print(speech + "  okay this is it")
         return {
             "speech": speech,

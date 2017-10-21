@@ -17,6 +17,8 @@ from flask import make_response
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
+import google.oauth2.credentials
+import google_auth_oauthlib.flow 
 
 
 # Flask app should start in global layout
@@ -52,9 +54,11 @@ def processRequest(req):
         store = file.Storage('storage.json')
         creds = store.get()
         if not creds or creds.invalid:
-            flow = client.flow_from_clientsecrets(CLIENT_SECRET, SCOPES)
+            flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(CLIENT_SECRET, scope=[SCOPES])
+            authorization_url, state = flow.authorization_url(access_type='offline',include_granted_scopes='true')
+   
             creds = tools.run_flow(flow,store)
-        GMAIL = build('gmail', 'v1', http=creds.authorize(Http()))
+        GMAIL = build('gmail', 'v2', http=creds.authorize(Http()))
 
         threads = GMAIL.users().threads().list(userId='me').execute().get('threads',[])
         i = 0

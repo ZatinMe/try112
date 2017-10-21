@@ -76,7 +76,7 @@ def processRequest(req):
                 subject = msg
                 if subject:
                     print ('%s (%d msgs)' % (subject, nmsgs))
-                     sub = str(i) + sub + subject + "/n"   
+                    sub = str(i) + sub + subject + "/n"   
         speech = sub
         print("response:")
         print(speech)
